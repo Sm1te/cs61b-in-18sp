@@ -11,27 +11,18 @@ public class Palindrome {
         return Chars;
     }
 
-    public boolean isPalindrome(String word){
-        int flag=0;
-        if(word.length()<=1){
-            flag=1;
-        }else{
-            int i=0,j=word.length()-1;
-            while(i<j){
-                if(word.charAt(i)!=word.charAt(j)){
-                    flag=0;
-                }else {
-                    flag = 1;
+    public boolean isPalindrome(String word) {
+        Deque<Character> deque = wordToDeque(word);
+        while(deque.size()>1){
+            for (int i = 0; i < deque.size() / 2; i++) {
+                char temp1 = deque.removeFirst();
+                char temp2 = deque.removeLast();
+                if (temp1 - temp2!=0) {
+                    return false;
                 }
-                i++;
-                j--;
             }
         }
-        if(flag==1){
-            return true;
-        }else {
-            return false;
-        }
+        return true;
     }
 
     public boolean isPalindrome(String word, CharacterComparator cc){

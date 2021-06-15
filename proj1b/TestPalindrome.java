@@ -17,7 +17,7 @@ public class TestPalindrome {
         assertTrue(palindrome.isPalindrome("tat"));
         assertFalse(palindrome.isPalindrome("at"));
 
-        assertFalse(palindrome.isPalindrome("catc"));
+        assertFalse(palindrome.isPalindrome("gaAsdag"));
         assertTrue(palindrome.isPalindrome("caac"));
         assertTrue(palindrome.isPalindrome("a"));
         assertTrue(palindrome.isPalindrome(""));
