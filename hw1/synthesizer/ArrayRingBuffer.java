@@ -81,6 +81,9 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
         if (first == this.capacity) {
             first = 0;
         }
+        if (this.isEmpty()) {
+            throw new RuntimeException("there is nothing");
+        }
         return rb[first];
         // TODO: Return the first item. None of your instance variables should change.
     }
@@ -99,10 +102,10 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
         }
 
         public boolean hasNext() {
-            if (start == capacity) {
+            if (start == capacity - 1) {
                 start = 0;
             }
-            return !(start == last);
+            return (start != last);
         }
 
         public T next() {

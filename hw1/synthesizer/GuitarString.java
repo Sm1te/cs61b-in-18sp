@@ -31,10 +31,10 @@ public class GuitarString {
 
     /* Pluck the guitar string by replacing the buffer with white noise. */
     public void pluck() {
-        for (int i = 0; i < buffer.capacity() - 1; i++) {
+        while(!buffer.isEmpty()) {
             buffer.dequeue();
         }
-        for (int i = 0; i < buffer.capacity() - 1; i++) {
+        while(!buffer.isFull()) {
             double r = Math.random() - 0.5;
             buffer.enqueue(r);
         }
@@ -49,9 +49,11 @@ public class GuitarString {
      * the Karplus-Strong algorithm.
      */
     public void tic() {
-        double temp = buffer.dequeue();
-        double newitem = (temp + buffer.peek()) * DECAY / 2;
-        buffer.enqueue(newitem);
+        double first = buffer.dequeue();
+        double second = buffer.peek();
+        double avg = (first + second) / 2;
+        double play = avg * DECAY;
+        buffer.enqueue(play);
         // TODO: Dequeue the front sample and enqueue a new sample that is
         //       the average of the two multiplied by the DECAY factor.
         //       Do not call StdAudio.play().
