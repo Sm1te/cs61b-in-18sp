@@ -113,7 +113,7 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         // Throws an exception if index is invalid. DON'T CHANGE THIS LINE.
         validateSinkSwimArg(index);
         /** TODO: Your code here. */
-        while(inBounds(index)&&getNode(index).myPriority>getNode(index/2).myPriority){
+        while(inBounds(index/2)&&getNode(index).myPriority<getNode(index/2).myPriority){
             swap(index/2,index);
             index=index/2;
         }
@@ -179,11 +179,14 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
     @Override
     public T removeMin() {
         /* TODO: Your code here! */
-        if(size==0) throw new NoSuchElementException();
-        T item = peek();
-        swap(1,size--);
+        if(size==0) return null;
+        T item = contents[1].myItem;
+        swap(1,size);
+        contents[size--].myItem=null;
+        if (size == 0) {
+            return item;
+        }
         sink(1);
-        contents[size+1].myItem=null;
         return item;
     }
 
